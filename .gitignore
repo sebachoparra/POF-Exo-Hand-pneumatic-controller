@@ -14,3 +14,18 @@ __pycache__/
 *.pyc
 *.egg-info/
 .pytest_cache/
+
+# Recorded rosbags (data, not code)
+bags/
+
+# Large data files from imu_pwm_acquisition (kept on-disk only, not in git)
+imu_pwm_acquisition/data/
+imu_pwm_acquisition/bags/
+
+# Editor / tool configs at workspace root
+.claude/
+
+# Local runtime artifacts, not part of the project
+.lgd-nfy0
+adc_monitor.html
+adc_ws_bridge.py
