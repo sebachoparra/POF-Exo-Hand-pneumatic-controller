@@ -1,4 +1,4 @@
-# ICRA2026 — Protocolo de Adquisición de Datos IMU + PWM
+Protocolo de Adquisición de Datos IMU + PWM
 
 Directorio base: `~/ICRA2026/NEW_TEST/`
 
