@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Interface.css') }}">
+    <title>Exohand</title>
+</head>
+<body>
+    <h1>Luva de Reabilitação</h1>
+
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; position: relative;">
+        <img src="{{ url_for('static', filename='hand.png') }}" alt="Mão" class="hand">
+        <span class="point" id="point-thumb" style="top: 30%; left: 18%;"></span>
+        <span class="point" id="point-index" style="top: 10%; left: 30.7%;"></span>
+        <span class="point" id="point-middle" style="top: 8%; left: 51%;"></span>
+        <span class="point" id="point-ring" style="top: 11%; left: 68%;"></span>
+        <span class="point" id="point-pinky" style="top: 18%; left: 80.5%;"></span>
+    </div>
+
+    <div class="container-buttonLeft">
+        <div class="title-container">
+            <h3 class="title">Flexão</h3>
+        </div>
+        <div class="upper-boots">
+            <button class="button" onclick="togglecolor(this, 'thumb');showPoint('thumb');sendCommand('thumb_close')">Dedão</button>
+            <button class="button" onclick="togglecolor(this, 'index');showPoint('index');sendCommand('index_close')">Indicador</button>
+            <button class="button" onclick="togglecolor(this, 'middle');showPoint('middle');sendCommand('middle_close')">Meio</button>
+            <button class="button" onclick="togglecolor(this, 'ring');showPoint('ring'); sendCommand('ring_close')">Anelar</button>
+            <button class="button" onclick="togglecolor(this, 'pinky');showPoint('pinky');sendCommand('pinky_close')">Mindinho</button>
+        </div>
+        <div class="lower-boots">    
+            <button class="button" onclick="togglecolor(this, 'tripod');showPoint('tripod');sendCommand('tripod_pinch_close')">Tripod</button>
+            <button class="button" onclick="togglecolor(this, 'pince');showPoint('pince');sendCommand('pulp_pinch_close')">Pinça</button>
+            <button class="button" onclick="togglecolor(this, 'powergrip');showPoint('powergrip');sendCommand('power_grip_close')">Todos</button>
+            <button class="button" onclick="togglecolor(this, 'four');showPoint('four');sendCommand('close_four_finger')">Quatro</button>
+        </div>
+    </div>
+    
+    <div class="button-open">
+        <button class="button" onclick="togglecolor(this, 'allopen');showPoint('open');sendCommand('open')">Abrir</button>
+    </div>
+
+
+    <div class="container-buttonRight">
+        <div class="title-container">
+            <h3 class="title">Extensão</h3>
+        </div>
+        <div class="upper-boots">
+            <button class="button" onclick="togglecolor(this, 'thumb'); showPoint('thumb'); sendCommand('thumb_open');">Dedão</button>
+            <button class="button" onclick="togglecolor(this, 'index'); showPoint('index'); sendCommand('index_open');">Indicador</button>
+            <button class="button" onclick="togglecolor(this, 'middle'); showPoint('middle'); sendCommand('middle_open');">Meio</button>
+            <button class="button" onclick="togglecolor(this, 'ring'); showPoint('ring'); sendCommand('ring_open');">Anelar</button>
+            <button class="button" onclick="togglecolor(this, 'pinky'); showPoint('pinky'); sendCommand('pinky_open');">Mindinho</button>
+        </div>
+        <div class="lower-boots">
+            <button class="button" onclick="togglecolor(this, 'tripod'); showPoint('tripod'); sendCommand('tripod_pinch_open');">Tripod</button>
+            <button class="button" onclick="togglecolor(this, 'pince'); showPoint('pince'); sendCommand('pulp_pinch_open');">Pinça</button>
+            <button class="button" onclick="togglecolor(this, 'powergrip'); showPoint('powergrip'); sendCommand('power_grip_open');">Todos</button>
+            <button class="button" onclick="togglecolor(this, 'four'); showPoint('four'); sendCommand('open_four_finger');">Quatro</button>
+        </div>
+        
+
+    <script src="{{ url_for('static', filename='js/Interface.js') }}"></script>
+</body>
+</html>

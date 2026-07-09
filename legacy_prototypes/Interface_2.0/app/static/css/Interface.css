@@ -1,0 +1,138 @@
+.hand {
+    max-width: 400px;
+    height: auto ;
+    margin-bottom: 250px; /* Hand position in relation to the title*/
+    z-index: 1;
+    
+}
+
+h1 {
+    text-align: center;
+    
+}
+
+.title-container {
+    width: 100%; /* Makes the title span the entire width of the container */
+    display: flex;
+    justify-content: center; /* Center the title */
+}
+
+.button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    transition: background-color 0.3s;
+    flex: 1;
+    min-width: 90px; /* Keeps buttons to a minimum size */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    margin: 0;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+
+.container-buttonLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Center buttons horizontally */
+    margin-right: 950px; /*distance from the right margin*/
+    margin-top: -300px; /* Adjust as needed to move the buttons up */
+}
+
+.container-buttonRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 950px; /*distance from the left margin*/
+    margin-top: -175px; /* Adjust as needed to move the buttons up */
+}
+
+.upper-boots{ 
+    display: flex;
+    gap: 10px; /* Add horizontal space between buttons */
+    margin-bottom: 20px;
+}
+
+.lower-boots{ 
+    display: flex;
+    gap: 10px; /* Add a space between buttons*/
+    margin-bottom: 20px;
+}
+
+.button-open{
+    z-index: 2;
+    margin-top: -40px;
+}
+
+.point {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    display: none; /* Initially hidden */
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 20px; 
+        margin-bottom: -80px;
+    }
+
+    .hand {
+        max-width: 150px; 
+        margin-bottom: 1px; 
+        margin: 0px;
+    }
+    .Testhand{
+        max-height: 400px;
+        margin: 0px;
+        margin-bottom: -130px;
+    }
+
+    .button {
+        font-size: 14px;
+        padding: 8px 12px; 
+    }    
+
+    .container-buttonLeft{
+        gap: 5px;
+        margin-top: -100px; 
+        margin-left: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        margin: 0px;
+        margin-right: 200px;
+    }
+
+    .container-buttonRight {
+        gap: 5px; 
+        margin-top: -400px; 
+        margin-right: 750px;
+        flex-direction: column;
+        
+    }
+
+    .upper-boots,
+    .lower-boots {
+        gap: 5px; 
+        margin-bottom: 5px; 
+        display: flex;
+        flex-direction: column;
+    }
+
+}
