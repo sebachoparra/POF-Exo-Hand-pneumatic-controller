@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+from flask import Flask
+
+class Flask_OOP():
+
+    @property
+    def app(self) -> Flask:
+        return self._app
+  
+    @app.setter
+    def app(self, app: Flask):
+        self._app = app
+
+    def __init__(self) -> None:
+        self.app = Flask(__name__)
+        self.register_endpoints()
+
+    def register_endpoints(self):
+        self.app.add_url_rule(rule='/', endpoint='helloworld', view_func=self.helloworld, methods=['GET'])
+
+    def helloworld(self):
+        return "Greetings from Flask OOP App"
+
+    def run(self, *args, **kwargs):
+        self.app.run(*args, **kwargs)
+
+if __name__ == "__main__":
+    myFlaskApp = Flask_OOP()
+    myFlaskApp.run(debug=False, port=5100)

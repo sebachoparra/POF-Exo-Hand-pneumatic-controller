@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz Web con Flask y ROS2</title>
+</head>
+<body>
+    <h1>Publicar Mensaje en ROS2</h1>
+
+    <form action="/publicar" method="POST">
+        <label for="mensaje">Mensaje:</label>
+        <input type="text" id="mensaje" name="mensaje" required>
+        <button type="submit">Publicar</button>
+    </form>
+
+    {% if mensaje %}
+        <p>Mensaje publicado: {{ mensaje }}</p>
+    {% endif %}
+</body>
+</html>

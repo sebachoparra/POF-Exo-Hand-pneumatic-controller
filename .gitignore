@@ -1,0 +1,16 @@
+# Colcon build artifacts (should never live inside src/, but excluded just in case)
+build/
+install/
+log/
+
+# Excluded by request
+examples/
+
+# Editor configs (contained a plaintext credential, exclude entirely)
+.vscode/
+
+# Python / ROS2 artifacts
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/

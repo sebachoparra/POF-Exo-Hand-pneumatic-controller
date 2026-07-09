@@ -1,0 +1,21 @@
+pof_pressure_filter_multi:
+  ros__parameters:
+    pof_indices: [0, 1, 2, 3, 4]
+    pof_names:   ["thumb","index","middle","ring","pinky"]
+    press_index: 6
+
+    fs_adc: 400.0
+    rate_hz: 100.0
+    v_supply: 5.08
+
+    # Calibración por dedo (voltajes en reposo/fin de carrera)
+    pof_v_min: [1.275, 1.278, 1.280, 1.279, 1.277]
+    pof_v_max: [1.315, 1.318, 1.320, 1.319, 1.317]
+    invert_pof: [false, false, false, false, false]
+
+    # Cortes de filtro
+    fc_pof:   [10.0, 10.0, 10.0, 10.0, 10.0]   # Hz por dedo
+    fc_press: 5.0                               # Hz presión
+
+    publish_per_finger: true
+    topic_prefix: "/exohand/pof"

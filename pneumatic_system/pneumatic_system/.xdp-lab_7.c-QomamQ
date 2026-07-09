@@ -1,0 +1,279 @@
+// C code low level control of GPIO
+#define PORTC *((volatile uint8_t *) 0x28)  //Display 7 Segmentos
+#define DDRC *((volatile uint8_t *) 0x27)
+#define PORTL *((volatile uint8_t *) 0x10B)  //Anodos/Katodos Display 7 Segmentos L0-L5; L6-7 -> Seletor
+#define DDRL *((volatile uint8_t *) 0x10A)
+#define PINL *((volatile uint8_t *) 0x109)
+
+#define Bit(n) (1 << (n))
+
+uint8_t disp7 [] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x67};
+uint8_t disp7_2 [] = {0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xE7};
+//                    pgfedcba	
+/*uint8_t disp7 [] = {00111111b, 0
+                      00000110b, 1
+                      01011011b, 2
+                      01001111b, 3
+                      01100110b, 4
+                      01101101b, 5
+                      01111101b, 6
+                      00000111b, 7
+                      01111111b, 8
+                      01100111b, 9
+*/
+const int vdin = 10;
+int uni = 0;
+int dez = 0; 
+int cen = 0;
+int mil = 0;
+int Mil = 0;
+int DMil = 0;
+int timeVD = 0;
+int PotVal = 0;
+uint8_t horario = 0;
+uint8_t timeCounter = 0;
+
+void setup(void){
+  DDRC = 0xFF;	//Port C as Output -> Segments
+  DDRL = 0x3F;	//Port L as Output -> Cathodes and Input Selector
+  PORTL |= Bit(7)|Bit(6); // if DDRx = 0, then PORTx = 1 -> Activates Pull-up
+  Serial.begin(9600);
+}
+
+void CountUp(void);
+void CountDown(void);
+void Relogio23(void);
+void Relogio12(void);
+void visDinamica(int DMil, int Mil, int mil, int cen, int dez, int uni);
+
+void loop(void){
+  uint8_t SW_PB = ~PINL >> 6 & 0x03;
+  Serial.println(SW_PB);
+  switch(SW_PB){
+    case 0:
+      CountUp();
+    case 1:
+      CountDown();
+    case 2:
+      Relogio23();
+    case 3:
+      Relogio12();
+  }
+}
+
+void CountUp(void){
+    timeCounter = 0;
+    DMil = 0;
+    Mil = 0;
+    mil = 0;
+    cen = 0;
+    dez = 0;
+    uni = 0;
+    while ((~PINL >> 6 & 0x03) == 0){
+      if (timeCounter == 5){
+        uni++;
+        timeCounter = 0;
+        if( uni > 9 ){
+          uni = 0;
+          dez++;
+        }
+        if( dez > 9 ){
+          dez = 0;
+          cen++;
+        }
+        if( cen > 9 ){
+          cen = 0;
+          mil++;
+        }
+        if( mil > 9 ){
+          mil = 0;
+          Mil++;
+        }
+        if( Mil > 9 ){
+          Mil = 0;
+          DMil++;
+        }
+        if( DMil > 9 ){
+          DMil = 0;
+        }
+      }else{
+        timeCounter++;
+    }
+    visDinamica(DMil,Mil,mil,cen,dez,uni);
+  }
+}
+
+void CountDown(void){
+    timeCounter = 0;
+    DMil = 9;
+    Mil = 9;
+    mil = 9;
+    cen = 9;
+    dez = 9;
+    uni = 9;
+    while ((~PINL >> 6 & 0x03) == 1){
+      if (timeCounter == 5){
+        uni--;
+        timeCounter = 0;
+        if( uni < 0 ){
+          uni = 9;
+          dez--;
+        }
+        if( dez < 0 ){
+          dez = 9;
+          cen--;
+        }
+        if( cen < 0 ){
+          cen = 9;
+          mil--;
+        }
+        if( mil < 0 ){
+          mil = 9;
+          Mil--;
+        }
+        if( Mil < 0 ){
+          Mil = 9;
+          DMil--;
+        }
+        if( DMil < 0 ){
+          DMil = 9;
+        }
+      }else{
+        timeCounter++;
+    }
+    visDinamica(DMil,Mil,mil,cen,dez,uni);
+  }
+}
+
+void Relogio23(void){
+    timeCounter = 0;
+    DMil = 0;
+    Mil = 0;
+    mil = 0;
+    cen = 0;
+    dez = 0;
+    uni = 0;
+    while ((~PINL >> 6 & 0x03) == 2){
+      if (timeCounter == 10){
+        uni++;
+        timeCounter = 0;
+        if( uni > 9 ){
+          uni = 0;
+          dez++;
+        }
+        if( dez > 5 ){
+          dez = 0;
+          cen++;
+        }
+        if( cen > 9 ){
+          cen = 0;
+          mil++;
+        }
+        if( mil > 5 ){
+          mil = 0;
+          Mil++;
+        }
+        if( Mil > 3 ){
+          Mil = 0;
+          DMil++;
+        }
+        if( DMil > 2 ){
+          DMil = 0;
+        }
+      }else{
+        timeCounter++;
+    }
+    visDinamica(DMil,Mil,mil,cen,dez,uni);
+  }
+}
+
+void Relogio12(void){
+    timeCounter = 0;
+    horario = 23;
+    DMil = 1;
+    Mil = 2;
+    mil = 5;
+    cen = 9;
+    dez = 5;
+    uni = 9;
+
+    while ((~PINL >> 6 & 0x03) == 3){
+      if (timeCounter == 10){
+        uni++;
+        timeCounter = 0;
+        if( uni > 9 ){
+          uni = 0;
+          dez++;
+        }
+        if( dez > 5 ){
+          dez = 0;
+          cen++;
+        }
+        if( cen > 9 ){
+          cen = 0;
+          mil++;
+        }
+        if( mil > 5 ){
+          mil = 0;
+          Mil++;
+          horario++;
+        }
+        if( (Mil > 2) && (DMil == 1)){
+          Mil = 1;
+          DMil = 0;
+        }
+        else{
+          if( Mil > 2 ){
+            Mil = 0;
+            DMil++;
+          }
+          if( DMil > 1 ){
+            DMil = 0;
+          }
+        }
+        if(horario == 23) horario = 0;
+      }else{
+        timeCounter++;
+    }
+    visDinamica(DMil,Mil,mil,cen,dez,uni);
+  }
+}
+
+void visDinamica(int DMil, int Mil, int mil, int cen, int dez, int uni){
+  uint8_t katodo = 0x01;		//Initial State
+  Serial.println(horario);
+  if(horario > 12){
+    PORTC = disp7[uni];
+  }
+  else{
+    PORTC = disp7_2[uni];
+  }
+  PORTL = ~katodo;
+  delay(vdin);
+  PORTL = 0xFF;   // Only neccessary for simulation!!
+  PORTC = disp7[dez];
+  katodo <<= 1;
+  PORTL = ~katodo;
+  delay(vdin);
+  PORTL = 0xFF;
+  katodo <<= 1;
+  PORTC = disp7[cen];
+  PORTL = (PORTL & 0xC0)|~katodo;
+  delay(vdin);
+  PORTL = 0xFF;
+  katodo <<= 1;
+  PORTC = disp7[mil];
+  PORTL = (PORTL & 0xC0)|~katodo;
+  delay(vdin);
+  PORTL = 0xFF;
+  katodo <<= 1;
+  PORTC = disp7[Mil];
+  PORTL = (PORTL & 0xC0)|~katodo;
+  delay(vdin);
+  PORTL = 0xFF;
+  katodo <<= 1;
+  PORTC = disp7[DMil];
+  PORTL = (PORTL & 0xC0)|~katodo;
+  delay(vdin);
+  PORTL = 0xFF;
+}

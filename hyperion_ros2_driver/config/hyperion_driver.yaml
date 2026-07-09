@@ -1,0 +1,6 @@
+hyperion_driver_node:
+  ros__parameters:
+    interrogator_ip: "10.0.0.55"
+    publish_rate_hz: 100.0
+    stream_divider: 1
+    frame_id: "hyperion"

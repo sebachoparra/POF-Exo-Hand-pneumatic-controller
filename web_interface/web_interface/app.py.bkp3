@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+from flask import Flask, render_template
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+
+class WebInterfaceNode(Node):
+    @property
+    def app(self) -> Flask:
+        return self._app
+  
+    @app.setter
+    def app(self, app: Flask):
+        self._app = app
+
+    def __init__(self, name) -> None:
+        super().__init__(name)
+        self.app = Flask(__name__)
+        self.register_endpoints()
+        self.get_logger().info(f'Node {name} initialized.')
+
+    def register_endpoints(self):
+        self.app.add_url_rule(rule='/', endpoint='index', view_func=self.index, methods=['GET']) 
+        self.app.add_url_rule(rule='/publicar', endpoint='index', view_func=self.index, methods=['POST'])
+
+    def index(self):
+        return render_template('index.html')
+
+    def run(self, *args, **kwargs):
+        self.app.run(*args, **kwargs)
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    # Configure the node for a specific valve or air pump
+    name = 'web_interface'
+    node = WebInterfaceNode(name)
+    node.run(host='0.0.0.0', port=5000 ,debug=True)
+
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
