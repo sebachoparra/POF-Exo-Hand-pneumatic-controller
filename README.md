@@ -5,11 +5,8 @@
 ### ROS 2 control and sensing framework for a pneumatic soft hand exoskeleton
 
 <p align="center">
-  <img
-    src="https://github.com/user-attachments/assets/7cd1d72d-2325-4c24-b981-fe07d23a7242"
-    alt="ExoHand soft robotic hand exoskeleton"
-    width="500"
-  />
+  <img src="https://github.com/user-attachments/assets/7cd1d72d-2325-4c24-b981-fe07d23a7242"
+       alt="ExoHand soft robotic hand exoskeleton" width="500" />
 </p>
 
 </div>
@@ -34,11 +31,8 @@ including dual IMUs and support for optical interrogation systems.
 ## System Architecture
 
 <p align="center">
-  <img
-    src="https://github.com/user-attachments/assets/5409971e-2a1c-44f4-a684-abb8a43007b5"
-    alt="ExoHand ROS 2 system architecture"
-    width="750"
-  />
+  <img src="https://github.com/user-attachments/assets/5409971e-2a1c-44f4-a684-abb8a43007b5"
+       alt="ExoHand ROS 2 system architecture" width="750" />
 </p>
 
 The software architecture separates the system into sensing, signal
