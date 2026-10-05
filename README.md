@@ -203,8 +203,8 @@ See the package documentation for the required SDK configuration.
 Clone the repository into a ROS 2 workspace:
 
 ```bash
-git clone https://github.com/sebachoparra/exohand-ros2-ws.git
-cd exohand-ros2-ws
+git clone https://github.com/sebachoparra/POF-Exo-Hand-pneumatic-controller.git
+cd POF-Exo-Hand-pneumatic-controller
 ```
 
 Source ROS 2:
