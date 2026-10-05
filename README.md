@@ -79,7 +79,7 @@ Soft hand exoskeleton
 The repository follows the standard ROS 2 workspace organization:
 
 ```text
-exohand-ros2-ws/
+POF-Exo-Hand-pneumatic-controller/
 ├── src/
 │   ├── adc_node/
 │   ├── exohand_signal_proc/
